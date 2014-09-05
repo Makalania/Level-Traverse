@@ -1,0 +1,60 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        
+        if (root == null) return res;
+        
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode> newStack = new Stack<TreeNode>();
+        newStack.push(root);
+        boolean flag = false;
+        
+        while (!newStack.isEmpty()) {
+            stack = (Stack)newStack.clone();
+            newStack = new Stack<TreeNode>();
+            int count = stack.size();
+            List<Integer> temp = new ArrayList<Integer>();
+            res.add(temp);
+            
+            while (count > 0) {
+                TreeNode node = stack.pop();
+                temp.add(node.val);
+                
+                if (flag) {
+                    if (node.right != null) {
+                        newStack.push(node.right);
+                    }
+                    
+                    if (node.left != null) {
+                        newStack.push(node.left);
+                    }
+                }
+                
+                if (!flag) {
+                    if (node.left != null) {
+                        newStack.push(node.left);
+                    }
+                    
+                    if (node.right != null) {
+                        newStack.push(node.right);
+                    }
+                }
+                
+                count--;
+            }
+            flag = !flag;
+        }
+        
+        return res;
+        
+    }
+}
