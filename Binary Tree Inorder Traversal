@@ -33,3 +33,37 @@ public class Solution {
         
     }
 }
+
+
+
+
+
+public class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        
+        if (root == null) {
+            return res;
+        }
+        
+        inOrderTraverse(res, root);
+        
+        return res;
+        
+    }
+    
+    private void inOrderTraverse(List<Integer> res, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        
+        if (root.left != null) {
+            inOrderTraverse(res, root.left);
+        }
+        
+        res.add(root.val);
+        
+        if (root.right != null) {
+            inOrderTraverse(res, root.right);
+        }
+    }
